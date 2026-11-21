@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@opeolluwa/ryder": "github:opeolluwa/ryder#v1.6.20",
     "@nuxt/content": "3.17.0",
     "@nuxt/eslint": "1.17.0",
     "@nuxt/hints": "1.1.5",

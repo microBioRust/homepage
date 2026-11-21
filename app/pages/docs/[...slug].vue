@@ -1,0 +1,12 @@
+<script lang="ts" setup>
+definePageMeta({ layout: 'docs' })
+
+const route = useRoute()
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('docs').path(route.path).first()
+})
+</script>
+
+<template>
+  <ContentRenderer v-if="page" :value="page" />
+</template>

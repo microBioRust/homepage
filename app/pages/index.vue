@@ -1,0 +1,2 @@
+<template>
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolorem qui architecto nisi optio in sit perferendis doloremque non suscipit nihil, magnam, voluptatum quos. Iusto sunt quaerat accusamus omnis laudantium.</template>
