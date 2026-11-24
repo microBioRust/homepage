@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { headerNavigation } from "~/data/routes";
+import { headerNavigation, githubLink } from "~/data/routes";
 
 const navigation = headerNavigation;
 const mobileMenuOpen = ref(false);
@@ -47,7 +47,7 @@ function isActive(href: string) {
 
 <template>
   <header
-    class="inset-x-0 top-0 z-50 bg-white/95 dark:bg-onyx-600/95 backdrop-blur-md shadow-sm transition-all duration-300 ease-out"
+    class="inset-x-0 top-0 z-50 bg-gray-950 text-white backdrop-blur-md shadow-sm transition-all duration-300 ease-out"
     :class="
       isHeaderHidden
         ? '-translate-y-full opacity-0'
@@ -55,18 +55,18 @@ function isActive(href: string) {
     "
   >
     <nav
-      class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8"
+      class="mx-auto flex max-w-7xl items-center px-6 py-4 lg:px-8"
     >
-      <div class="flex lg:flex-1">
-        <RyderLogo alt="microBioRust" />
-      </div>
+      <!-- Logo — left -->
+      <NuxtLink class="flex shrink-0" href="/">
+        <AppLogo alt="microBioRust" class="w-32 lg:w-48" />
+      </NuxtLink>
 
-      <!-- Mobile controls -->
-      <div class="flex lg:hidden items-center gap-2">
-        <UColorModeButton />
+      <!-- Mobile hamburger — right -->
+      <div class="flex lg:hidden items-center ml-auto">
         <button
           type="button"
-          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-onyx-100"
+          class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
           @click="mobileMenuOpen = true"
         >
           <span class="sr-only">Open main menu</span>
@@ -74,35 +74,34 @@ function isActive(href: string) {
         </button>
       </div>
 
-      <!-- Desktop nav -->
-      <div class="hidden lg:flex lg:gap-x-1">
+      <!-- Desktop nav — center -->
+      <div class="hidden lg:flex lg:gap-x-1 flex-1 justify-center">
         <NuxtLink
           v-for="item in navigation"
           :key="item.label"
           :to="item.to"
-          class="relative text-sm font-medium px-4 py-2 transition-all duration-200 text-gray-700 dark:text-onyx-100 hover:text-primary-500 dark:hover:text-primary-400"
-          :class="
-            isActive(item.to) ? 'text-primary-600 dark:text-primary-400' : ''
-          "
+          class="relative text-sm font-medium px-4 py-2 transition-all duration-200 text-gray-400 hover:text-white"
+          :class="isActive(item.to) ? 'text-white' : ''"
         >
           {{ item.label }}
           <span
-            class="absolute left-4 right-4 bottom-0 h-0.5 rounded-full bg-primary-500 transition-all duration-300 origin-left"
+            class="absolute left-4 right-4 bottom-0 h-0.5 rounded-full bg-white transition-all duration-300 origin-left"
             :class="isActive(item.to) ? 'scale-x-100' : 'scale-x-0'"
           />
         </NuxtLink>
       </div>
 
-      <!-- Desktop right -->
-      <div
-        class="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-3"
-      >
-        <!-- <UColorModeButton /> -->
-        <NuxtLink to="/docs">
-          <RyderButton size="sm" color="primary" variant="solid">
-            Get Started
-          </RyderButton>
-        </NuxtLink>
+      <!-- GitHub icon — right -->
+      <div class="hidden lg:flex shrink-0">
+        <a
+          :href="githubLink.to"
+          target="_blank"
+          rel="noreferrer"
+          class="text-gray-400 hover:text-white transition-colors duration-200"
+          :aria-label="githubLink.label"
+        >
+          <UIcon name="ri:github-line" class="size-5" />
+        </a>
       </div>
     </nav>
 
@@ -133,17 +132,17 @@ function isActive(href: string) {
       >
         <div
           v-if="mobileMenuOpen"
-          class="fixed bottom-0 inset-x-0 z-50 lg:hidden bg-white dark:bg-onyx-600 rounded-t-3xl shadow-2xl"
+          class="fixed bottom-0 inset-x-0 z-50 lg:hidden bg-gray-900 rounded-t-3xl shadow-2xl"
         >
           <div class="flex justify-center pt-3 pb-1">
-            <div class="w-10 h-1 rounded-lg bg-gray-300 dark:bg-onyx-400" />
+            <div class="w-10 h-1 rounded-lg bg-gray-700" />
           </div>
 
           <div class="flex items-center justify-between px-5 py-3">
-            <span class="text-base font-bold text-gray-900 dark:text-onyx-50">Menu</span>
+            <span class="text-base font-bold text-white">Menu</span>
             <button
               type="button"
-              class="-m-2.5 rounded-lg p-2.5 text-gray-500 dark:text-onyx-200 hover:text-gray-700 dark:hover:text-onyx-50 hover:bg-gray-100 dark:hover:bg-onyx-500 transition"
+              class="-m-2.5 rounded-lg p-2.5 text-gray-400 hover:text-white hover:bg-gray-800 transition"
               @click="mobileMenuOpen = false"
             >
               <span class="sr-only">Close menu</span>
@@ -156,8 +155,8 @@ function isActive(href: string) {
               v-for="item in navigation"
               :key="item.label"
               :to="item.to"
-              class="flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-medium text-gray-700 dark:text-onyx-100 hover:text-white hover:bg-primary-500 transition-colors duration-150"
-              :class="isActive(item.to) ? 'bg-primary-500 text-white' : ''"
+              class="flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-800 transition-colors duration-150"
+              :class="isActive(item.to) ? 'bg-white text-gray-950' : ''"
               @click="mobileMenuOpen = false"
             >
               <div class="flex items-center gap-3">
@@ -166,13 +165,13 @@ function isActive(href: string) {
               </div>
               <UIcon
                 name="ri:arrow-right-s-line"
-                class="size-4 text-gray-400 dark:text-onyx-300"
+                class="size-4 text-gray-500"
               />
             </NuxtLink>
 
             <NuxtLink
               to="/docs"
-              class="flex items-center justify-between px-4 py-3.5 mt-1 rounded-xl font-medium text-white bg-primary-500 hover:bg-primary-600 transition-colors duration-150"
+              class="flex items-center justify-between px-4 py-3.5 mt-1 rounded-xl font-medium text-gray-950 bg-white hover:bg-gray-200 transition-colors duration-150"
               @click="mobileMenuOpen = false"
             >
               <div class="flex items-center gap-3">

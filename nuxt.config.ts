@@ -11,7 +11,18 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "@pinia/nuxt",
     "@opeolluwa/ryder",
+    "nuxt-aos",
   ],
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: 'github-dark',
+          langs: ['rust', 'python', 'bash', 'toml', 'json', 'powershell', 'css'],
+        },
+      },
+    },
+  },
   build: { transpile: ["@opeolluwa/ryder"] },
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },

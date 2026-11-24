@@ -14,8 +14,11 @@ export const headerNavigation: HomepageRouteItem[] = [
   { label: "Home", to: "/", icon: "ri:home-line" },
   { label: "Docs", to: "/docs", icon: "ri:book-open-line" },
   { label: "Blog", to: "/blog", icon: "ri:article-line" },
-  { label: "GitHub", to: "https://github.com/microBioRust", icon: "ri:github-line", external: true },
 ];
+
+export const githubLink: HomepageRouteItem = {
+  label: "GitHub", to: "https://github.com/microBioRust", icon: "ri:github-line", external: true,
+};
 
 export const footerSections: FooterLinkSection[] = [
   {
